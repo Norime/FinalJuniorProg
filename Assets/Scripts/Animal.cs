@@ -17,11 +17,15 @@ public class Animal : CapacityManager
     }
     public void SpawnDog()
     {
-
+        float RandomX = Random.Range(-xSpawnRange, xSpawnRange);
+        float RandomZ = Random.Range(-zSpawnRange, zSpawnRange);
+        SpawnAnimal(RandomX, RandomZ, Dogs);
     }
     public void SpawnCat()
     {
-
+        float RandomX = Random.Range(-xSpawnRange, xSpawnRange);
+        float RandomZ = Random.Range(-zSpawnRange, zSpawnRange);
+        SpawnAnimal(RandomX, RandomZ, Cats);
     }
 
     public void SpawnAnimal(float posX, float posZ, GameObject animal)
