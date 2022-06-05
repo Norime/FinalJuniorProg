@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class MainMenu : MonoBehaviour
 {
+    public TextMeshProUGUI playerNameText;
     public GameObject BtnStart;
     public GameObject BtnOption;
     public GameObject BtnExit;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.Instance.LoadOption();
+        GameManager.Instance.gameLaunched = false;
+        playerNameText.text = GameManager.Instance.playerName;
     }
 
     // Update is called once per frame
@@ -24,6 +29,7 @@ public class MainMenu : MonoBehaviour
     }
     public void LoadGame()
     {
+        GameManager.Instance.gameLaunched = true;
         SceneManager.LoadScene(1);
         //string playerName = InputName.GetComponent<TMP_InputField>().text;
         //if (playerName != "")
