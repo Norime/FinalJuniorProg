@@ -1723,6 +1723,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 123640675643104010, guid: e5a859db2a411eb438418f79219076d0, type: 3}
+      propertyPath: jumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 123640675643104010, guid: e5a859db2a411eb438418f79219076d0, type: 3}
       propertyPath: mouseSensibility
       value: 300
       objectReference: {fileID: 0}
