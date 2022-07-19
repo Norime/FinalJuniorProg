@@ -10,7 +10,7 @@ public class PlayerController : CapacityManager
     
     private float forwardInput;
     private float horizontalInput;
-    private int JumpNumber;
+    public int JumpNumber;
     public float mouseSensibility;
     private GameObject ChildCamera;
 
@@ -22,6 +22,7 @@ public class PlayerController : CapacityManager
         maxJumpNumber = 3;
         isOnGround = true;
         ChildCamera = transform.GetChild(0).gameObject;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -41,7 +42,26 @@ public class PlayerController : CapacityManager
         transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
         transform.Rotate(Vector3.up * mouseSensibility * Time.deltaTime * horizontalMouseAxe);
         //vertical axe = camera only
-        ChildCamera.transform.Rotate(Vector3.left * mouseSensibility * Time.deltaTime * verticalMouseAxe);
+        var cameraRotation = Vector3.left * mouseSensibility * Time.deltaTime * verticalMouseAxe;
+
+        //var cameraRotation = Mathf.Clamp(verticalMouseAxe, -90f, 90f);
+
+        //ChildCamera.transform.rotation = Quaternion.AngleAxis(cameraRotation.x, Vector3.right);
+        //ChildCamera.transform.rotation = Quaternion.Euler(0, cameraRotation.x,0);
+
+
+
+        ChildCamera.transform.Rotate(cameraRotation, Space.Self);
+        cameraRotation.x = Mathf.Clamp(ChildCamera.transform.eulerAngles.y, -90, 90);
+        ChildCamera.transform.eulerAngles = cameraRotation;
+
+        //elevation.x = Mathf.Clamp(elevation.x, -90f, 90f);
+
+        //ChildCamera.transform.Rotate(cameraRotation);
+        //var rotationTo = ChildCamera.transform.rotation.eulerAngles;
+        //rotationTo.x = Mathf.Clamp(rotationTo.x, -90f, 90f);
+        //ChildCamera.transform.rotation = Quaternion.Euler(rotationTo);
+        //Debug.Log(cameraRotation);
         //Chunk jump possibility
         if (Input.GetKeyDown(KeyCode.Space) && maxJumpNumber > JumpNumber)
         {
